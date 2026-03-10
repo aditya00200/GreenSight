@@ -63,11 +63,6 @@ GreenSight/
 
 ---
 
-## 🔹 Live Demo
- https://greensight-80pq.onrender.com/
-
----
-
 ## 🔹 Usage
 
 1. Drag and drop or select an image of a product.  
