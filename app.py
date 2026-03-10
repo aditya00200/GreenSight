@@ -8,15 +8,12 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 
-
-# Configuration
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp'}
 
 
-# IMPORTANT: Replace with your NEW API Key
-API_KEY = "AIzaSyBiwXIDV98AncM9WlVNXmkBFriO3JVYqx8"
+API_KEY = os.environ.get("GOOGLE_API_KEY")
 genai.configure(api_key=API_KEY)
 
 
@@ -50,8 +47,6 @@ def analyze():
     file.save(filepath)
 
     try:
-
-        # Using the current stable flash model
         model = genai.GenerativeModel('gemini-2.5-flash')
         sample_file = genai.upload_file(path=filepath)
 
@@ -94,4 +89,5 @@ def analyze():
 
 
 if __name__ == '__main__':
+
     app.run(debug=True)
