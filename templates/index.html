@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenSight Dashboard | AI Sustainability</title>
+    <link rel="shortcut icon" href="https://png.pngtree.com/png-clipart/20250417/original/pngtree-eco-friendly-earth-globe-with-green-leaves-illustration-design-png-image_20824079.png" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-wrapper">
+        <aside class="sidebar">
+            <div class="logo"><img height="24px" src="https://png.pngtree.com/png-clipart/20250417/original/pngtree-eco-friendly-earth-globe-with-green-leaves-illustration-design-png-image_20824079.png">Green<span>Sight</span></div>
+            <nav>
+                <button class="nav-item active" onclick="showView('analyzer')">
+                    <span class="icon">🔍</span> Analyzer
+                </button>
+                <button class="nav-item" onclick="showView('history')">
+                    <span class="icon">📜</span> Scan History
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+            </div>
+        </aside>
+
+        <main class="content">
+            <div id="view-analyzer" class="view">
+                <header>
+                    <h1>New Analysis</h1>
+                    <p>Upload a product image to begin.</p>
+                </header>
+                
+                <section class="upload-section card">
+                    <div id="drop-zone" class="drop-zone">
+                        <input type="file" id="file-input" hidden>
+                        <button id="remove-img-btn" class="remove-btn hidden" title="Remove Image">✕</button>
+                        <div id="upload-placeholder">
+                            <div class="upload-icon">🌿</div>
+                            <p>Drop image or <span>Browse</span></p>
+                        </div>
+                        <img id="preview" class="hidden">
+                    </div>
+                    <button id="analyze-btn" class="btn-primary" disabled>Analyze Product</button>
+                </section>
+
+                <div id="loader" class="hidden">
+                    <div class="spinner"></div>
+                    <p>Calculating impact...</p>
+                </div>
+
+                <div id="analysis-result" class="hidden">
+                    </div>
+            </div>
+
+            <div id="view-history" class="view hidden">
+                <header style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h1>Scan History</h1>
+                        <p>Review your previous sustainability checks.</p>
+                    </div>
+                    <button onclick="clearAllHistory()" class="btn-back" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">
+                        Clear All
+                    </button>
+                </header>
+                <div id="history-grid" class="history-grid">
+                    </div>
+            </div>
+
+            <div id="view-detail" class="view hidden">
+                <button class="btn-back" onclick="showView('history')">← Back to History</button>
+                <div id="detail-content"></div>
+            </div>
+        </main>
+    </div>
+
+    <template id="result-template">
+        <div class="result-header card">
+            <div>
+                <h2 class="res-name"></h2>
+                <span class="res-category badge"></span>
+            </div>
+            <div class="score-display">
+                <div class="score-val"></div>
+                <small>Score</small>
+            </div>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-card card"><small>Carbon Saved: </small><h3 class="res-carbon"></h3></div>
+            <div class="metric-card card"><small>Water Saved: </small><h3 class="res-water"></h3></div>
+            <div class="metric-card card"><small>Air Impact: </small><h3 class="res-air"></h3></div>
+        </div>
+
+        <div class="card">
+            <h4>Impact Summary</h4>
+            <p class="res-impact"></p>
+        </div>
+        <div class="card">
+            <h4>Sustainable Alternatives</h4>
+            <ul class="res-alternatives eco-list"></ul>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h4>Materials</h4>
+                <ul class="res-materials eco-list"></ul>
+            </div>
+            <div class="card">
+                <h4>Eco-Tips</h4>
+                <ul class="res-tips eco-list"></ul>
+            </div>
+        </div>
+    </template>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
