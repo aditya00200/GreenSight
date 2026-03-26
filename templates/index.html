@@ -1,118 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GreenSight Dashboard | AI Sustainability</title>
-    <link rel="shortcut icon" href="https://png.pngtree.com/png-clipart/20250417/original/pngtree-eco-friendly-earth-globe-with-green-leaves-illustration-design-png-image_20824079.png" type="image/x-icon">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GreenSight — AI Sustainability Analyzer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="https://png.pngtree.com/png-clipart/20250417/original/pngtree-eco-friendly-earth-globe-with-green-leaves-illustration-design-png-image_20824079.png" type="image/x-icon">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="app-wrapper">
-        <aside class="sidebar">
-            <div class="logo"><img height="24px" src="https://png.pngtree.com/png-clipart/20250417/original/pngtree-eco-friendly-earth-globe-with-green-leaves-illustration-design-png-image_20824079.png">Green<span>Sight</span></div>
-            <nav>
-                <button class="nav-item active" onclick="showView('analyzer')">
-                    <span class="icon">🔍</span> Analyzer
-                </button>
-                <button class="nav-item" onclick="showView('history')">
-                    <span class="icon">📜</span> Scan History
-                </button>
-            </nav>
-            <div class="sidebar-footer">
-            </div>
-        </aside>
 
-        <main class="content">
-            <div id="view-analyzer" class="view">
-                <header>
-                    <h1>New Analysis</h1>
-                    <p>Upload a product image to begin.</p>
-                </header>
-                
-                <section class="upload-section card">
-                    <div id="drop-zone" class="drop-zone">
-                        <input type="file" id="file-input" hidden>
-                        <button id="remove-img-btn" class="remove-btn hidden" title="Remove Image">✕</button>
-                        <div id="upload-placeholder">
-                            <div class="upload-icon">🌿</div>
-                            <p>Drop image or <span>Browse</span></p>
-                        </div>
-                        <img id="preview" class="hidden">
-                    </div>
-                    <button id="analyze-btn" class="btn-primary" disabled>Analyze Product</button>
-                </section>
+<nav class="topnav">
+  <a href="#home" class="nav-logo">
+    <div class="leaf">🌿</div>
+    Green<span class="dot">Sight</span>
+  </a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how">How it works</a>
+    <a href="#about">About</a>
+    <a href="#analyzer" class="nav-cta">Try it →</a>
+  </div>
+</nav>
 
-                <div id="loader" class="hidden">
-                    <div class="spinner"></div>
-                    <p>Calculating impact...</p>
-                </div>
+<section id="home">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
 
-                <div id="analysis-result" class="hidden">
-                    </div>
-            </div>
+  <div class="hero-badge">
+    <span class="pulse"></span>
+    AI-Powered Sustainability Analysis
+  </div>
 
-            <div id="view-history" class="view hidden">
-                <header style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <h1>Scan History</h1>
-                        <p>Review your previous sustainability checks.</p>
-                    </div>
-                    <button onclick="clearAllHistory()" class="btn-back" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">
-                        Clear All
-                    </button>
-                </header>
-                <div id="history-grid" class="history-grid">
-                    </div>
-            </div>
+  <h1 class="hero-title">
+    Know the true cost<br>
+    of <span class="green">every product</span><br>
+    <span class="outline">you choose.</span>
+  </h1>
 
-            <div id="view-detail" class="view hidden">
-                <button class="btn-back" onclick="showView('history')">← Back to History</button>
-                <div id="detail-content"></div>
-            </div>
-        </main>
+  <p class="hero-sub">
+    Upload any product image and GreenSight's AI instantly calculates its environmental footprint, sustainability score, and greener alternatives.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#analyzer" class="btn-primary">Analyze a Product →</a>
+    <a href="#how" class="btn-secondary">How it works</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-val">100+</div>
+      <div class="stat-label">Product Categories</div>
     </div>
+    <div class="stat">
+      <div class="stat-val">AI</div>
+      <div class="stat-label">Powered Analysis</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">0–100</div>
+      <div class="stat-label">Sustainability Score</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">Free</div>
+      <div class="stat-label">To Use</div>
+    </div>
+  </div>
+</section>
 
-    <template id="result-template">
-        <div class="result-header card">
-            <div>
-                <h2 class="res-name"></h2>
-                <span class="res-category badge"></span>
+<section id="features">
+  <div class="section-label">✦ Features</div>
+  <h2 class="section-title">Everything you need to shop greener</h2>
+  <p class="section-sub">GreenSight gives you instant, actionable sustainability insights — no expertise required.</p>
+
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">📊</div>
+      <h3>Sustainability Score</h3>
+      <p>A clear 0–100 score tells you exactly how eco-friendly a product is at a glance, with color-coded ratings for instant comprehension.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🌍</div>
+      <h3>Carbon Impact</h3>
+      <p>See estimated CO₂ saved or emitted, water usage, and air quality impact. Real numbers, not vague buzzwords.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">♻️</div>
+      <h3>Smart Alternatives</h3>
+      <p>Get AI-recommended sustainable swaps tailored to the specific product you scanned, so you can make a better choice immediately.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔬</div>
+      <h3>Material Analysis</h3>
+      <p>Understand what a product is likely made of and how those materials affect the environment throughout their lifecycle.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">💡</div>
+      <h3>Eco Tips</h3>
+      <p>Personalized sustainability tips based on the actual product — from how to use it greener to how to dispose of it responsibly.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📜</div>
+      <h3>Scan History</h3>
+      <p>Every analysis is saved locally so you can track your awareness over time, revisit past scans, and compare products.</p>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div style="text-align:center; margin-bottom:60px;">
+    <div class="section-label" style="justify-content:center;">✦ Process</div>
+    <h2 class="section-title" style="margin:0 auto 16px; text-align:center;">Three steps to clarity</h2>
+    <p class="section-sub" style="margin:0 auto; text-align:center;">Fast, accurate, and beautifully simple.</p>
+  </div>
+
+  <div class="steps-row">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h4>Upload a Photo</h4>
+      <p>Take or upload any product image — packaging, labels, or the product itself. JPG, PNG, WebP all supported.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h4>AI Analyzes It</h4>
+      <p>Our Gemini-powered vision model examines materials, category, branding, and known environmental data.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h4>Get Your Report</h4>
+      <p>Receive a full sustainability report with score, impact metrics, alternatives, and actionable tips in seconds.</p>
+    </div>
+  </div>
+</section>
+
+<section id="analyzer" style="padding-top: 80px;">
+  <div style="text-align:center; margin-bottom:40px;">
+    <div class="section-label" style="justify-content:center;">✦ Try it now</div>
+    <h2 class="section-title" style="margin:0 auto; text-align:center;">Analyze any product</h2>
+  </div>
+
+  <div class="app-shell">
+    <aside class="app-sidebar">
+      <div class="app-sidebar-logo">
+        <div class="leaf-sm">🌿</div>
+        GreenSight
+      </div>
+      <nav class="sb-nav">
+        <button class="sb-item active" onclick="appShowView('scan')" id="sb-scan">
+          <span class="icon">🔍</span> Analyzer
+        </button>
+        <button class="sb-item" onclick="appShowView('history')" id="sb-history">
+          <span class="icon">📜</span> History
+        </button>
+      </nav>
+    </aside>
+
+    <div class="app-main">
+      <div id="app-scan" class="view">
+        <div class="view-header">
+          <div>
+            <h2>New Analysis</h2>
+            <p>Upload a product image to begin.</p>
+          </div>
+        </div>
+
+        <div class="upload-card">
+          <div id="drop-zone" class="drop-zone" onclick="document.getElementById('file-input').click()">
+            <input type="file" id="file-input" hidden accept="image/*">
+            <button class="remove-btn" id="remove-btn" onclick="resetUpload(event)">✕</button>
+            <div id="upload-placeholder">
+              <div class="upload-icon-wrap">🌿</div>
+              <div class="upload-text">
+                <strong>Drop image here or <span class="browse">browse</span></strong>
+                <p>PNG, JPG, WebP — up to 16MB</p>
+              </div>
             </div>
-            <div class="score-display">
-                <div class="score-val"></div>
-                <small>Score</small>
-            </div>
+            <img id="preview" alt="Preview">
+          </div>
+          <button class="analyze-btn" id="analyze-btn" disabled onclick="analyzeProduct()">
+            <span>🔍</span> Analyze Product
+          </button>
         </div>
 
-        <div class="metrics-grid">
-            <div class="metric-card card"><small>Carbon Saved: </small><h3 class="res-carbon"></h3></div>
-            <div class="metric-card card"><small>Water Saved: </small><h3 class="res-water"></h3></div>
-            <div class="metric-card card"><small>Air Impact: </small><h3 class="res-air"></h3></div>
+        <div id="loader">
+          <div class="spinner-ring"></div>
+          <p class="loader-text">Calculating environmental impact…</p>
         </div>
 
-        <div class="card">
-            <h4>Impact Summary</h4>
-            <p class="res-impact"></p>
-        </div>
-        <div class="card">
-            <h4>Sustainable Alternatives</h4>
-            <ul class="res-alternatives eco-list"></ul>
-        </div>
+        <div id="analysis-result"></div>
+      </div>
 
-        <div class="grid-2">
-            <div class="card">
-                <h4>Materials</h4>
-                <ul class="res-materials eco-list"></ul>
-            </div>
-            <div class="card">
-                <h4>Eco-Tips</h4>
-                <ul class="res-tips eco-list"></ul>
-            </div>
+      <div id="app-history" class="view hidden">
+        <div class="view-header">
+          <div>
+            <h2>Scan History</h2>
+            <p>Your previous sustainability checks.</p>
+          </div>
+          <button class="clear-btn" onclick="clearAllHistory()">Clear All</button>
         </div>
-    </template>
+        <div class="history-grid" id="history-grid"></div>
+      </div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+      <div id="app-detail" class="view hidden">
+        <button class="back-btn" onclick="appShowView('history')">← Back to History</button>
+        <div id="detail-content"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual">
+      <div class="big-leaf">🌱</div>
+    </div>
+    <div class="about-content">
+      <div class="section-label">✦ About</div>
+      <h2 class="section-title">Built to make sustainability accessible</h2>
+      <p class="section-sub">GreenSight was created with a simple belief: consumers deserve to know the environmental impact of what they buy — without needing a PhD to understand it.</p>
+
+      <ul class="about-list">
+        <li>
+          <div class="al-icon">🤖</div>
+          <div class="al-text">
+            <h5>Powered by Gemini Vision AI</h5>
+            <p>Google's multimodal AI model analyzes product images with remarkable accuracy, identifying materials, categories, and environmental characteristics.</p>
+          </div>
+        </li>
+        <li>
+          <div class="al-icon">🔒</div>
+          <div class="al-text">
+            <h5>Privacy First</h5>
+            <p>Images are processed and immediately deleted. Your scan history lives only in your browser's local storage — never on our servers.</p>
+          </div>
+        </li>
+        <li>
+          <div class="al-icon">⚡</div>
+          <div class="al-text">
+            <h5>Instant Results</h5>
+            <p>No sign-up, no waiting. Upload a photo and get a full sustainability report in seconds, completely free.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">🌿 Green<span class="dot">Sight</span></div>
+  <p>AI-powered sustainability analysis for conscious consumers.</p>
+  <p style="color: var(--muted);">Built with Gemini Vision AI</p>
+</footer>
+
+<template id="result-template">
+  <div class="result-hero">
+    <div class="result-hero-left">
+      <h2 class="res-name"></h2>
+      <span class="badge res-category"></span>
+    </div>
+    <div class="score-ring-wrap">
+      <div class="score-circle res-score-circle">
+        <div class="score-num res-score"></div>
+        <div class="score-label">Score</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="metrics-row">
+    <div class="metric-pill">
+      <small>Carbon Saved</small>
+      <strong class="res-carbon"></strong>
+    </div>
+    <div class="metric-pill">
+      <small>Water Saved</small>
+      <strong class="res-water"></strong>
+    </div>
+    <div class="metric-pill">
+      <small>Air Impact</small>
+      <strong class="res-air"></strong>
+    </div>
+  </div>
+
+  <div class="result-grid">
+    <div class="info-card full">
+      <h4>Impact Summary</h4>
+      <p class="res-impact"></p>
+    </div>
+    <div class="info-card">
+      <h4>Sustainable Alternatives</h4>
+      <ul class="alt-list res-alternatives"></ul>
+    </div>
+    <div class="info-card">
+      <h4>Materials Used</h4>
+      <ul class="eco-list res-materials"></ul>
+    </div>
+    <div class="info-card full">
+      <h4>Eco Tips</h4>
+      <ul class="eco-list res-tips"></ul>
+    </div>
+  </div>
+</template>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
